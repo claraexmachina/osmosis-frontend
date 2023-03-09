@@ -15,6 +15,7 @@ import { ObservableQueryPoolFeesMetrics } from "./pool-fees";
 import { ObservableQueryAccountsPoolRewards } from "./pool-rewards";
 import { ObservableQueryTokensData } from "./token-data";
 import { ObservableQueryTokensHistoricalChart } from "./token-historical-chart";
+import { ObservableQueryTokensPairHistoricalChart } from "./token-pair-historical-chart";
 
 /** Root store for queries external to any chain. */
 export class QueriesExternalStore {
@@ -22,6 +23,7 @@ export class QueriesExternalStore {
   public readonly queryAccountsPoolRewards: DeepReadonly<ObservableQueryAccountsPoolRewards>;
   public readonly queryChainStatus: DeepReadonly<ObservableQueryIbcChainsStatus>;
   public readonly queryTokenHistoricalChart: DeepReadonly<ObservableQueryTokensHistoricalChart>;
+  public readonly queryTokenPairHistoricalChart: DeepReadonly<ObservableQueryTokensPairHistoricalChart>;
   public readonly queryTokenData: DeepReadonly<ObservableQueryTokensData>;
   public readonly queryActiveGauges: DeepReadonly<ObservableQueryActiveGauges>;
   public readonly queryICNSNames: DeepReadonly<ObservableQueryICNSNames>;
@@ -55,6 +57,12 @@ export class QueriesExternalStore {
       priceStore,
       feeMetricsBaseURL
     );
+    this.queryTokenPairHistoricalChart =
+      new ObservableQueryTokensPairHistoricalChart(
+        kvStore,
+        priceStore,
+        feeMetricsBaseURL
+      );
     this.queryTokenData = new ObservableQueryTokensData(
       kvStore,
       feeMetricsBaseURL
